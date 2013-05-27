@@ -32,6 +32,12 @@ describe User do
 		end
 	end
 
+	describe "with admin attribute set to 'true" do
+		before { @user.toggle!(:admin) }
+
+		it { should be_admin}
+	end
+
 	describe "when name is not present" do
 		before {@user.name = " " }
 		it {should_not be_valid}		
@@ -144,7 +150,7 @@ describe User do
     		FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
     	end
 
-    	its(:feed) { self.should include(older_micropost)}
+    	its(:feed) { should include(older_micropost)}
      	its(:feed) { should include(newer_micropost)}
      	its(:feed) { should_not include(unfollowed_post)}
     end
